@@ -1,0 +1,207 @@
+/* 🌍 Cấu hình chung */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+}
+
+/* 🖼️ Container chính */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+    justify-content: center;
+}
+
+/* 🎯 Panel chứa nội dung */
+.panel {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* 📷 Ảnh xem trước và Grad-CAM */
+.preview-img, .gradcam-img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: contain;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    display: block;
+}
+
+/* Ẩn ảnh Grad-CAM ban đầu */
+.hidden {
+    display: none;
+}
+
+/* 🔘 Nút bấm */
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    background-color: #0056d2;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #003c9e;
+    transform: scale(1.05);
+}
+
+.btn-reset {
+    background-color: #dc3545;
+}
+
+.btn-reset:hover {
+    background-color: #a71d2a;
+}
+
+/* 🎭 Loading Indicator */
+.loading {
+    font-size: 14px;
+    font-weight: bold;
+    color: #666;
+    margin-top: 10px;
+    animation: fadeIn 0.5s infinite alternate;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+}
+
+/* 🗨️ Chatbox */
+#chatbox {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    scrollbar-width: thin;
+    max-height: 400px;
+    scroll-behavior: smooth;
+}
+
+/* 💬 Bong bóng tin nhắn */
+.user-msg, .bot-msg {
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 5px 0;
+    max-width: 80%;
+    word-wrap: break-word;
+    font-size: 14px;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.user-msg {
+    background-color: #007bff;
+    color: white;
+    align-self: flex-end;
+}
+
+.bot-msg {
+    background-color: #e9ecef;
+    color: black;
+    align-self: flex-start;
+}
+
+/* ⌨️ Input Chat */
+.chat-input-group {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+#chatInput {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+#chatInput:focus {
+    border-color: #007bff;
+    outline: none;
+    background-color: #eef5ff;
+}
+
+#sendBtn {
+    width: auto;
+    padding: 10px 14px;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+/* 🎤 Input mô tả văn bản */
+.text-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.text-input:focus {
+    border-color: #007bff;
+    outline: none;
+    background-color: #eef5ff;
+}
+
+.invalid-text {
+    border-color: #dc3545;
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .panel {
+        width: 100%;
+        max-width: 90%;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

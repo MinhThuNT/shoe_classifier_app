@@ -1,0 +1,13 @@
+Flask
+Flask-Cors
+torch
+torchvision
+transformers
+Pillow
+opencv-python
+numpy
+matplotlib
+google-generativeai
+flask
+python-dotenv
+timm
