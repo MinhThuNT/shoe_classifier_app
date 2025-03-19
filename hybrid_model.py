@@ -5,6 +5,12 @@ from torchvision import models, transforms
 from transformers import DistilBertModel, DistilBertTokenizer
 from timm import create_model
 
+image_transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+])
+
 # Định nghĩa mô hình DistilBERTClassifier
 class DistilBERTClassifier(nn.Module):
     def __init__(self):
@@ -47,6 +53,8 @@ class HybridResNetViTDistilBERT(nn.Module):
             nn.Dropout(0.3),
             nn.Linear(512, num_classes)
         )
+
+        self.transform = image_transform
 
     def forward(self, image, text=None):
         feat_resnet = self.resnet(image).view(image.size(0), -1)

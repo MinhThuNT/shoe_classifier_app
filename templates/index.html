@@ -1,47 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Shoe Classification & Chatbot</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </head>
 <body>
     <div class="container">
-        <!-- Image Upload & Classification -->
-        <div class="panel">
+        <!-- Cột bên trái: Upload ảnh + Kết quả phân loại & Grad-CAM -->
+        <div class="panel classification-panel">
             <h3>Upload Image for Classification</h3>
             <form id="uploadForm" enctype="multipart/form-data">
-                <input type="file" id="fileInput" name="file" accept="image/*" class="custom-cursor-default-hover">
-                <img id="preview" src="" alt="Image Preview" class="preview-img hidden">
+                <input
+                    type="file"
+                    id="fileInput"
+                    name="file"
+                    accept="image/*"
+                    class="custom-cursor-default-hover"
+                />
+                <img
+                    id="preview"
+                    src=""
+                    alt="Image Preview"
+                    class="preview-img hidden"
+                />
+
+                <!-- Nhập mô tả văn bản -->
                 <div class="input-group">
-                    <input type="text" id="textInput" name="description" placeholder="Enter a brief description (optional)...">
+                    <input
+                        type="text"
+                        id="textInput"
+                        name="description"
+                        placeholder="Enter a brief description (optional)..."
+                    />
                     <button type="button" id="sendDescBtn" class="btn">💬 Send</button>
                 </div>
+
+                <!-- Nút chức năng -->
                 <div class="button-group">
                     <button type="button" id="classifyBtn" class="btn">🔍 Classify</button>
                     <button type="button" id="gradCamBtn" class="btn">🔥 Grad-CAM</button>
                     <button type="button" id="resetBtn" class="btn btn-reset">🔄 Reset</button>
                 </div>
             </form>
+
+            <!-- Mô tả người dùng -->
             <div id="descriptionDisplay" class="result-text hidden"></div>
+            <!-- Kết quả phân loại -->
             <p id="classificationResult" class="result-text"></p>
+            <!-- Loading Indicator -->
             <div id="loadingIndicator" class="loading hidden">⏳ Processing...</div>
+
+            <!-- Grad-CAM Result (đặt ngay dưới kết quả phân loại) -->
+            <h3>Grad-CAM Result</h3>
+            <img id="gradcamResult" src="" alt="Grad-CAM result" class="gradcam-img hidden" />
         </div>
 
-        <!-- Grad-CAM Visualization -->
-        <div id="gradcamContainer" class="panel hidden">
-            <h3>Grad-CAM Visualization</h3>
-            <img id="gradcamResult" src="" alt="Grad-CAM result" class="gradcam-img">
-        </div>
-
-        <!-- Chatbot Panel -->
-        <div class="panel">
+        <!-- Cột bên phải: Chatbot -->
+        <div class="panel chatbot-panel">
             <h3>Shoe Chatbot</h3>
             <div id="chatbox" class="chatbox"></div>
             <div class="chat-input-group">
-                <input type="text" id="chatInput" placeholder="Ask about shoes..." autocomplete="off">
+                <input
+                    type="text"
+                    id="chatInput"
+                    placeholder="Ask about shoes..."
+                    autocomplete="off"
+                />
                 <button id="sendBtn" class="btn">💬 Send</button>
             </div>
             <button id="resetChat" class="btn btn-reset">🗑 Reset Chat</button>

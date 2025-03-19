@@ -9,3 +9,6 @@ venv/
 *.dll
 *.lib
 *.pyd
+
+__pycache__/
+logs/

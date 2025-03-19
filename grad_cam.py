@@ -32,19 +32,22 @@ class GradCAMPP:
         weights = np.mean(grads, axis=(1, 2))
         heatmap = np.sum(weights[:, None, None] * activations, axis=0)
         heatmap = np.maximum(heatmap, 0)
-        heatmap = heatmap / np.max(heatmap)
+        heatmap = heatmap / np.max(heatmap) if np.max(heatmap) != 0 else heatmap
         return heatmap
 
 def predict_and_explain(image, text, model_hybrid, model_text, transform):
-    transform = get_image_transform()
-    image_tensor = transform(image).unsqueeze(0)
+    # Chuyển đổi ảnh từ PIL Image sang tensor và thêm batch dimension nếu cần.
+    tensor = transform(image)
+    if tensor.dim() == 3:
+        image_tensor = tensor.unsqueeze(0)  # (1, 3, H, W)
+    else:
+        image_tensor = tensor  # Nếu đã có batch dimension
 
-    # Kiểm tra xem có sử dụng văn bản không
+    # Kiểm tra tính hợp lệ của văn bản.
     if not is_valid_text(text):
-        text = ""  # Bỏ qua nếu văn bản không có ý nghĩa
+        text = ""
 
     model_hybrid.eval()
-
     with torch.no_grad():
         outputs = model_hybrid(image_tensor, text)
         _, predicted = torch.max(outputs, 1)
@@ -52,15 +55,15 @@ def predict_and_explain(image, text, model_hybrid, model_text, transform):
     class_names = {0: 'Boots', 1: 'Sandals', 2: 'Shoes', 3: 'Slippers'}
     predicted_class = class_names.get(predicted.item(), "Unknown")
 
-    # Grad-CAM xử lý ảnh
+    # Sử dụng layer cuối của ResNet để tính Grad-CAM.
     target_layer = model_hybrid.resnet.layer4[-1]
     gradcam = GradCAMPP(model_hybrid, target_layer)
     heatmap = gradcam.generate_heatmap(image_tensor)
 
-    # Xử lý hiển thị ảnh với heatmap
+    # Truyền trực tiếp image_tensor (với shape (1, 3, H, W)) cho overlay_heatmap
     overlayed_image = overlay_heatmap(image_tensor, heatmap)
 
-    # Nếu có văn bản hợp lệ, tạo mô tả từ model_text
+    # Nếu có văn bản hợp lệ, tạo mô tả từ model_text.
     text_description = ""
     if text:
         with torch.no_grad():

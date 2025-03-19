@@ -16,7 +16,7 @@ body {
     flex-wrap: wrap;
     gap: 20px;
     width: 100%;
-    max-width: 900px;
+    max-width: 1200px; /* Tăng lên cho rộng rãi hơn */
     justify-content: center;
 }
 
@@ -26,13 +26,15 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 400px;
     text-align: center;
+    flex: 1; /* Cho phép panel giãn rộng */
+    min-width: 350px; /* Đảm bảo panel không quá hẹp */
+    box-sizing: border-box;
 }
 
 /* 📷 Ảnh xem trước và Grad-CAM */
-.preview-img, .gradcam-img {
+.preview-img,
+.gradcam-img {
     width: 100%;
     max-height: 250px;
     object-fit: contain;
@@ -48,9 +50,11 @@ body {
 }
 
 /* 🔘 Nút bấm */
+/* BỎ width: 100%; display: block; => chuyển sang inline-flex */
 button {
-    display: block;
-    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     padding: 12px;
     margin-top: 10px;
     cursor: pointer;
@@ -86,8 +90,12 @@ button:hover {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0.6; }
-    to { opacity: 1; }
+    from {
+        opacity: 0.6;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* 🗨️ Chatbox */
@@ -107,7 +115,8 @@ button:hover {
 }
 
 /* 💬 Bong bóng tin nhắn */
-.user-msg, .bot-msg {
+.user-msg,
+.bot-msg {
     padding: 10px 14px;
     border-radius: 8px;
     margin: 5px 0;
@@ -119,8 +128,14 @@ button:hover {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .user-msg {
@@ -188,6 +203,30 @@ button:hover {
     color: #721c24;
 }
 
+/* 📑 Input-group và button-group: hiển thị ngang */
+.input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.input-group input {
+    flex: 1; /* Ô nhập chiếm phần còn lại */
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center; /* canh giữa, hoặc space-between */
+}
+
+.button-group button {
+    width: auto;
+    margin-top: 0; /* tránh đẩy nút xuống hàng */
+}
+
 /* 📱 Responsive */
 @media (max-width: 768px) {
     .container {
@@ -196,7 +235,7 @@ button:hover {
     }
 
     .panel {
-        width: 100%;
+        width: 100%; /* full width trên màn hình nhỏ */
         max-width: 90%;
     }
 

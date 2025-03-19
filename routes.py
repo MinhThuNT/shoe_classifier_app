@@ -92,20 +92,25 @@ def gradcam():
     try:
         image = Image.open(file.stream).convert("RGB")
         transform = get_image_transform()
-        image_tensor = transform(image).unsqueeze(0)
 
-        heatmap, title = predict_and_explain(image_tensor, text, model_hybrid, model_text, model_hybrid.transform)
-        if heatmap is None:
+        # Chạy Grad-CAM
+        overlayed_image, predicted_class, text_description = predict_and_explain(
+            image, text, model_hybrid, model_text, transform
+        )
+
+        if overlayed_image is None:
             logging.error("Grad-CAM: Failed to generate heatmap")
             return jsonify({'error': 'Grad-CAM failed'}), 500
 
-        heatmap = cv2.resize(heatmap, (256, 256))
-        heatmap = np.uint8(255 * heatmap)
-        heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
-        _, buffer = cv2.imencode('.jpg', heatmap)
+        # Encode ảnh heatmap thành Base64 để trả về JSON
+        _, buffer = cv2.imencode('.jpg', overlayed_image)
         heatmap_base64 = base64.b64encode(buffer).decode('utf-8')
 
-        return jsonify({'gradcam': heatmap_base64, 'title': title})
+        return jsonify({
+            'gradcam': heatmap_base64,
+            'prediction': predicted_class,
+            'description': text_description
+        })
 
     except Exception as e:
         logging.error(f"Grad-CAM error: {e}")

@@ -25,11 +25,16 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!value) console.error(`❌ Missing element: ${key}`);
     });
 
-    // Ẩn ảnh xem trước và Grad-CAM khi chưa có file
+    document.getElementById("uploadForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Ngăn chặn submit và reload trang
+    });
+
+    // Ẩn ảnh xem trước, Grad-CAM và các kết quả khi chưa có file
     elements.previewImg.style.display = "none";
     elements.gradcamResult.style.display = "none";
     elements.loadingIndicator.style.display = "none";
     elements.descriptionDisplay.style.display = "none";
+    elements.classificationResult.style.display = "none";
 
     // 🖼️ Hiển thị ảnh xem trước
     elements.fileInput?.addEventListener("change", function (event) {
@@ -48,12 +53,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // 📝 Gửi mô tả văn bản và hiển thị bên cạnh image
+    // 📝 Gửi mô tả văn bản
     elements.sendDescBtn?.addEventListener("click", async () => {
         await sendDescription();
     });
+    // Sửa lại đoạn xử lý keyup: chỉ gọi sendDescription khi nhấn Enter (không phải Enter+Shift)
     elements.textInput?.addEventListener("keyup", async (event) => {
-        if (event.key === "Enter" && !event.shiftKey) await sendDescription();
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            await sendDescription();
+        }
     });
 
     async function sendDescription() {
@@ -68,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(response?.response || "No response from server.");
     }
 
-    // 🔍 Phân loại ảnh
+    // 🔍 Phân loại ảnh (chỉ hiển thị prediction)
     elements.classifyBtn?.addEventListener("click", async () => {
         await processImage("/predict", elements.classificationResult, "Classification Result: ");
     });
@@ -80,15 +89,16 @@ document.addEventListener("DOMContentLoaded", function () {
         elements.previewImg.src = "";
         elements.previewImg.style.display = "none";
         elements.classificationResult.innerText = "";
+        elements.classificationResult.style.display = "none";
         elements.gradcamResult.src = "";
         elements.gradcamResult.style.display = "none";
         elements.descriptionDisplay.innerText = "";
         elements.descriptionDisplay.style.display = "none";
     });
 
-    // 🔥 Hiển thị Grad-CAM
+    // 🔥 Hiển thị Grad-CAM (cập nhật cả prediction và ảnh Grad-CAM)
     elements.gradCamBtn?.addEventListener("click", async () => {
-        await processImage("/gradcam", elements.gradcamResult, "Grad-CAM Result: ");
+        await processImage("/gradcam", null, "Grad-CAM Result: ");
     });
 
     // 💬 Chat với chatbot
@@ -117,13 +127,16 @@ document.addEventListener("DOMContentLoaded", function () {
         elements.chatbox.innerHTML = "";
     });
 
-    // 🖼️ Xử lý gửi ảnh
+    // 🖼️ Xử lý gửi ảnh và hiển thị kết quả (cho cả /predict và /gradcam)
     async function processImage(url, outputElement, prefix = "") {
         const file = elements.fileInput.files[0];
         if (!file) return alert("⚠️ Please upload an image first.");
 
         elements.loadingIndicator.style.display = "block";
-        outputElement.style.display = "none";
+        // Ẩn cả hai vùng kết quả trước khi xử lý
+        elements.classificationResult.style.display = "none";
+        elements.gradcamResult.style.display = "none";
+
         const formData = new FormData();
         formData.append("file", file);
 
@@ -136,14 +149,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            if (data.prediction) {
-                outputElement.innerText = prefix + data.prediction;
-                outputElement.style.display = "block";
-            } else if (data.gradcam) {
-                outputElement.src = "data:image/jpeg;base64," + data.gradcam;
-                outputElement.style.display = "block";
-            } else {
-                alert("⚠️ Error: No valid response received.");
+            // Nếu gọi API /predict, chỉ cập nhật prediction
+            if (url === "/predict") {
+                if (data.prediction) {
+                    elements.classificationResult.innerText = prefix + data.prediction;
+                    elements.classificationResult.style.display = "block";
+                }
+            }
+            // Nếu gọi API /gradcam, cập nhật cả prediction và ảnh Grad-CAM
+            else if (url === "/gradcam") {
+                if (data.prediction) {
+                    elements.classificationResult.innerText = "Classification Result: " + data.prediction;
+                    elements.classificationResult.style.display = "block";
+                }
+                if (data.gradcam) {
+                    elements.gradcamResult.src = "data:image/jpeg;base64," + data.gradcam;
+                    elements.gradcamResult.style.display = "block";
+
+                    // Nếu có class "hidden", gỡ bỏ luôn
+                    elements.gradcamResult.classList.remove("hidden");
+                }
             }
         } catch (error) {
             alert("⚠️ Error: Could not process image.");
