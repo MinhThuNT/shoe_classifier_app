@@ -808,3 +808,26 @@ jinja2.exceptions.TemplateNotFound: index.html
 2025-03-18 10:08:44,084 - INFO - 127.0.0.1 - - [18/Mar/2025 10:08:44] "POST /chat HTTP/1.1" 200 -
 2025-03-18 10:09:31,179 - ERROR - Grad-CAM error: 'HybridResNetViTDistilBERT' object has no attribute 'transform'
 2025-03-18 10:09:31,179 - INFO - 127.0.0.1 - - [18/Mar/2025 10:09:31] "[35m[1mPOST /gradcam HTTP/1.1[0m" 500 -
+2025-03-18 12:34:09,973 - INFO - Loading pretrained weights from Hugging Face hub (timm/vit_tiny_patch16_224.augreg_in21k_ft_in1k)
+2025-03-18 12:34:12,284 - INFO - [timm/vit_tiny_patch16_224.augreg_in21k_ft_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+2025-03-18 12:34:41,675 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-03-18 12:34:41,684 - INFO - [33mPress CTRL+C to quit[0m
+2025-03-18 12:34:41,717 - INFO -  * Restarting with stat
+2025-03-18 12:35:21,322 - INFO - Loading pretrained weights from Hugging Face hub (timm/vit_tiny_patch16_224.augreg_in21k_ft_in1k)
+2025-03-18 12:35:22,346 - INFO - [timm/vit_tiny_patch16_224.augreg_in21k_ft_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+2025-03-18 12:36:02,608 - WARNING -  * Debugger is active!
+2025-03-18 12:36:02,688 - INFO -  * Debugger PIN: 820-356-896
+2025-03-18 12:36:04,323 - INFO - 127.0.0.1 - - [18/Mar/2025 12:36:04] "GET / HTTP/1.1" 200 -
+2025-03-18 12:36:04,330 - INFO - 127.0.0.1 - - [18/Mar/2025 12:36:04] "GET / HTTP/1.1" 200 -
+2025-03-18 12:36:04,370 - INFO - 127.0.0.1 - - [18/Mar/2025 12:36:04] "[36mGET /static/styles.css HTTP/1.1[0m" 304 -
+2025-03-18 12:36:04,386 - INFO - 127.0.0.1 - - [18/Mar/2025 12:36:04] "[36mGET /static/styles.css HTTP/1.1[0m" 304 -
+2025-03-18 12:36:04,394 - INFO - 127.0.0.1 - - [18/Mar/2025 12:36:04] "[36mGET /static/scripts.js HTTP/1.1[0m" 304 -
+2025-03-18 12:36:04,403 - INFO - 127.0.0.1 - - [18/Mar/2025 12:36:04] "[36mGET /static/scripts.js HTTP/1.1[0m" 304 -
+2025-03-18 12:36:48,541 - INFO - Prediction result: {'prediction': 'Boots', 'description': 'No valid description provided.'}
+2025-03-18 12:36:48,544 - INFO - 127.0.0.1 - - [18/Mar/2025 12:36:48] "POST /predict HTTP/1.1" 200 -
+2025-03-18 12:37:04,549 - INFO - Prediction result: {'prediction': 'Boots', 'description': 'No valid description provided.'}
+2025-03-18 12:37:04,550 - INFO - 127.0.0.1 - - [18/Mar/2025 12:37:04] "POST /predict HTTP/1.1" 200 -
+2025-03-18 12:37:06,727 - INFO - 127.0.0.1 - - [18/Mar/2025 12:37:06] "[33mPOST /send_desc HTTP/1.1[0m" 404 -
+2025-03-18 12:37:14,467 - ERROR - Grad-CAM error: 'HybridResNetViTDistilBERT' object has no attribute 'transform'
+2025-03-18 12:37:14,468 - INFO - 127.0.0.1 - - [18/Mar/2025 12:37:14] "[35m[1mPOST /gradcam HTTP/1.1[0m" 500 -
