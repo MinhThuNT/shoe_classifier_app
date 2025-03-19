@@ -3,9 +3,9 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     min-height: 100vh;
-    background-color: #f8f9fa;
+    background-color: #ECF0F1;
     margin: 0;
     padding: 20px;
 }
@@ -16,31 +16,38 @@ body {
     flex-wrap: wrap;
     gap: 20px;
     width: 100%;
-    max-width: 1200px; /* Tăng lên cho rộng rãi hơn */
+    max-width: 1200px;
     justify-content: center;
 }
 
 /* 🎯 Panel chứa nội dung */
 .panel {
-    background: white;
+    background: #FFFFFF;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
-    flex: 1; /* Cho phép panel giãn rộng */
-    min-width: 350px; /* Đảm bảo panel không quá hẹp */
+    flex: 1;
+    min-width: 350px;
     box-sizing: border-box;
+    color: #005F5F;
+}
+
+.input-row,
+.text-input,
+.text-upload-group,
+.result-text {
+    color: black
 }
 
 /* 📷 Ảnh xem trước và Grad-CAM */
 .preview-img,
 .gradcam-img {
-    width: 100%;
+    max-width: 100%;
     max-height: 250px;
-    object-fit: contain;
-    margin-top: 10px;
     border-radius: 5px;
     border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: block;
 }
 
@@ -50,34 +57,35 @@ body {
 }
 
 /* 🔘 Nút bấm */
-/* BỎ width: 100%; display: block; => chuyển sang inline-flex */
 button {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    padding: 12px;
+    padding: 10px 16px;
     margin-top: 10px;
     cursor: pointer;
     border: none;
     border-radius: 6px;
-    background-color: #0056d2;
+    background-color: #1ABC9C;
     color: white;
     font-weight: bold;
-    font-size: 16px;
-    transition: all 0.3s ease;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    transform 0.1s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 button:hover {
-    background-color: #003c9e;
+    background-color: #2ECC71;
     transform: scale(1.05);
 }
 
 .btn-reset {
-    background-color: #dc3545;
+    background-color: #E67E22;
 }
 
 .btn-reset:hover {
-    background-color: #a71d2a;
+    background-color: #DC5700;
 }
 
 /* 🎭 Loading Indicator */
@@ -100,7 +108,7 @@ button:hover {
 
 /* 🗨️ Chatbox */
 #chatbox {
-    height: 300px;
+    height: 550px;
     overflow-y: auto;
     border: 1px solid #ccc;
     padding: 10px;
@@ -110,7 +118,7 @@ button:hover {
     flex-direction: column;
     gap: 8px;
     scrollbar-width: thin;
-    max-height: 400px;
+    max-height: 1200px;
     scroll-behavior: smooth;
 }
 
@@ -139,15 +147,16 @@ button:hover {
 }
 
 .user-msg {
-    background-color: #007bff;
+    background-color: #1ABC9C;
     color: white;
     align-self: flex-end;
 }
 
 .bot-msg {
-    background-color: #e9ecef;
+    background-color: #DFF3F1;
     color: black;
     align-self: flex-start;
+    text-align: left;
 }
 
 /* ⌨️ Input Chat */
@@ -168,7 +177,7 @@ button:hover {
 }
 
 #chatInput:focus {
-    border-color: #007bff;
+    border-color: #008080;
     outline: none;
     background-color: #eef5ff;
 }
@@ -183,16 +192,16 @@ button:hover {
 /* 🎤 Input mô tả văn bản */
 .text-input {
     width: 100%;
-    padding: 10px;
+    padding: 8px 14px;
     margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
     font-size: 14px;
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .text-input:focus {
-    border-color: #007bff;
+    border-color: #008080;
     outline: none;
     background-color: #eef5ff;
 }
@@ -203,7 +212,7 @@ button:hover {
     color: #721c24;
 }
 
-/* 📑 Input-group và button-group: hiển thị ngang */
+/* 📑 Input-group, button-group, text-upload-group: hiển thị ngang */
 .input-group {
     display: flex;
     gap: 10px;
@@ -219,12 +228,31 @@ button:hover {
     display: flex;
     gap: 10px;
     margin-top: 10px;
-    justify-content: center; /* canh giữa, hoặc space-between */
+    justify-content: center;
 }
 
 .button-group button {
     width: auto;
-    margin-top: 0; /* tránh đẩy nút xuống hàng */
+    margin-top: 0;
+}
+
+.text-upload-group {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách giữa ô nhập và nút */
+    flex: 1;  /* Cho phép mở rộng theo chiều ngang */
+}
+
+.text-upload-group .text-input {
+    flex: 1;  /* Ô nhập chiếm tối đa không gian còn lại */
+    padding: 8px 14px;
+    white-space: nowrap;
+
+}
+
+.text-upload-group .btn-primary {
+    white-space: nowrap; /* Giữ nguyên kích thước nút, không bị co dãn */
+    padding: 8px 12px;
 }
 
 /* 📱 Responsive */
@@ -243,4 +271,81 @@ button:hover {
         font-size: 14px;
         padding: 10px;
     }
+}
+
+/* Nhóm chứa upload file, input text và ảnh preview */
+.upload-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa các phần tử */
+    width: 100%;
+}
+
+/* Căn "Choose file" về bên trái */
+.file-upload {
+    margin-right: auto;
+}
+
+/* Đặt input text và ảnh ngang hàng */
+.input-preview-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    flex-grow: 1;
+    margin-top: 10px;
+}
+
+/* Điều chỉnh input text */
+.text-input {
+    flex-grow: 1;
+    height: 40px;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.result-text {
+    text-align: left;
+    margin: 10px 0;
+}
+
+.shoe-box {
+    width: 100%;
+    min-height: 50px; /* Độ cao tối thiểu */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-label {
+    font-weight: bold;
+    text-align: left;
+    color: #005F5F;
+}
+.user-description-label {
+    font-weight: bold;
+    text-align: left;
+    color: #005F5F;
+}
+.classification-result{
+    font-weight: bold;
+    text-align:left;
+    color: #005F5F;
+}
+.gradcam-result{
+    font-weigh: bold;
+    text-align:left;
+    color: #005F5F;
+}
+
+
+/* Đảm bảo padding, border không làm vượt quá max-width */
+* {
+    box-sizing: border-box;
 }
