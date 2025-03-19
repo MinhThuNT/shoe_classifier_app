@@ -1,1 +1,11 @@
 .env
+
+# Bỏ qua model checkpoint lớn
+modelss/
+*.pth
+
+# Bỏ qua Virtual Environment
+venv/
+*.dll
+*.lib
+*.pyd
