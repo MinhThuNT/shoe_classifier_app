@@ -1,8 +1,8 @@
-# Shoe Classifier App
+# XAI-KICKVISION: EXPLAINABLE AI-DRIVEN MULTIMODAL FOOTWEAR RECOGNITION USING IMAGE-TEXT FUSION
 
 ## Giới thiệu
 
-Dự án **Shoe Classifier App** cho phép người dùng tải ảnh giày lên để **phân loại (Classification)** và hiển thị kết quả **Grad-CAM** giúp trực quan hóa các vùng quan trọng trong ảnh. Ngoài ra, ứng dụng còn tích hợp một **Chatbot** hỗ trợ người dùng hỏi đáp về các loại giày.
+Dự án **shoe_classifier_app** cho phép người dùng tải ảnh giày lên để **phân loại (Classification)** và hiển thị kết quả **Grad-CAM** giúp trực quan hóa các vùng quan trọng trong ảnh. Ngoài ra, ứng dụng còn tích hợp một **Chatbot** hỗ trợ người dùng hỏi đáp về các loại giày.
 
 ## Tính năng chính
 
