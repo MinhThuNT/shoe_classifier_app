@@ -1,351 +1,254 @@
-/* 🌍 Cấu hình chung */
+/* === CSS Variables === */
+:root {
+  --primary-color: #1ABC9C;
+  --primary-hover: #2ECC71;
+  --reset-color: #E67E22;
+  --reset-hover: #DC5700;
+  --font-family: Arial, sans-serif;
+  --border-color: #ccc;
+  --bg-light: #f9f9f9;
+  --text-color: #005F5F;
+  --background: #ECF0F1;
+}
+
+/* === Reset & Global Styles === */
+* {
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: left;
-    min-height: 100vh;
-    background-color: #ECF0F1;
-    margin: 0;
-    padding: 20px;
+  font-family: var(--font-family);
+  background-color: var(--background);
+  margin: 0;
+  padding: 20px;
 }
 
-/* 🖼️ Container chính */
+/* === Container chính === */
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: center;
 }
 
-/* 🎯 Panel chứa nội dung */
+/* === Panel chung === */
 .panel {
-    background: #FFFFFF;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    flex: 1;
-    min-width: 350px;
-    box-sizing: border-box;
-    color: #005F5F;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  flex: 1;
+  min-width: 350px;
+  color: var(--text-color);
 }
 
-.input-row,
-.text-input,
-.text-upload-group,
-.result-text {
-    color: black
+.panel header h3 {
+  margin: 0 0 10px;
 }
 
-/* 📷 Ảnh xem trước và Grad-CAM */
-.preview-img,
-.gradcam-img {
-    max-width: 100%;
-    max-height: 250px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: block;
-}
-
-/* Ẩn ảnh Grad-CAM ban đầu */
-.hidden {
-    display: none;
-}
-
-/* 🔘 Nút bấm */
-button {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 16px;
-    margin-top: 10px;
-    cursor: pointer;
-    border: none;
-    border-radius: 6px;
-    background-color: #1ABC9C;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-    transform 0.1s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-button:hover {
-    background-color: #2ECC71;
-    transform: scale(1.05);
-}
-
-.btn-reset {
-    background-color: #E67E22;
-}
-
-.btn-reset:hover {
-    background-color: #DC5700;
-}
-
-/* 🎭 Loading Indicator */
-.loading {
-    font-size: 14px;
-    font-weight: bold;
-    color: #666;
-    margin-top: 10px;
-    animation: fadeIn 0.5s infinite alternate;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0.6;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-/* 🗨️ Chatbox */
-#chatbox {
-    height: 550px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    background: #f9f9f9;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    scrollbar-width: thin;
-    max-height: 1200px;
-    scroll-behavior: smooth;
-}
-
-/* 💬 Bong bóng tin nhắn */
-.user-msg,
-.bot-msg {
-    padding: 10px 14px;
-    border-radius: 8px;
-    margin: 5px 0;
-    max-width: 80%;
-    word-wrap: break-word;
-    font-size: 14px;
-    opacity: 0;
-    animation: fadeIn 0.3s forwards;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.user-msg {
-    background-color: #1ABC9C;
-    color: white;
-    align-self: flex-end;
-}
-
-.bot-msg {
-    background-color: #DFF3F1;
-    color: black;
-    align-self: flex-start;
-    text-align: left;
-}
-
-/* ⌨️ Input Chat */
-.chat-input-group {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    gap: 10px;
-}
-
-#chatInput {
-    flex: 1;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
-#chatInput:focus {
-    border-color: #008080;
-    outline: none;
-    background-color: #eef5ff;
-}
-
-#sendBtn {
-    width: auto;
-    padding: 10px 14px;
-    font-size: 14px;
-    flex-shrink: 0;
-}
-
-/* 🎤 Input mô tả văn bản */
+/* === Input & Button === */
 .text-input {
-    width: 100%;
-    padding: 8px 14px;
-    margin-top: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 20px;
-    font-size: 14px;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
+  width: 100%;
+  padding: 8px 14px;
+  margin-top: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  color: black;
 }
 
 .text-input:focus {
-    border-color: #008080;
-    outline: none;
-    background-color: #eef5ff;
+  border-color: #008080;
+  background-color: #eef5ff;
+  outline: none;
 }
 
-.invalid-text {
-    border-color: #dc3545;
-    background-color: #f8d7da;
-    color: #721c24;
+button {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* 📑 Input-group, button-group, text-upload-group: hiển thị ngang */
-.input-group {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-top: 10px;
+button:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
 }
 
-.input-group input {
-    flex: 1; /* Ô nhập chiếm phần còn lại */
+.btn-reset {
+  background-color: var(--reset-color);
 }
 
-.button-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-    justify-content: center;
+.btn-reset:hover {
+  background-color: var(--reset-hover);
 }
 
-.button-group button {
-    width: auto;
-    margin-top: 0;
-}
-
+/* === Nhóm Text Upload === */
 .text-upload-group {
-    display: flex;
-    align-items: center;
-    gap: 8px; /* Khoảng cách giữa ô nhập và nút */
-    flex: 1;  /* Cho phép mở rộng theo chiều ngang */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
 }
 
-.text-upload-group .text-input {
-    flex: 1;  /* Ô nhập chiếm tối đa không gian còn lại */
-    padding: 8px 14px;
-    white-space: nowrap;
-
-}
-
-.text-upload-group .btn-primary {
-    white-space: nowrap; /* Giữ nguyên kích thước nút, không bị co dãn */
-    padding: 8px 12px;
-}
-
-/* 📱 Responsive */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .panel {
-        width: 100%; /* full width trên màn hình nhỏ */
-        max-width: 90%;
-    }
-
-    button {
-        font-size: 14px;
-        padding: 10px;
-    }
-}
-
-/* Nhóm chứa upload file, input text và ảnh preview */
-.upload-container {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Khoảng cách giữa các phần tử */
-    width: 100%;
-}
-
-/* Căn "Choose file" về bên trái */
-.file-upload {
-    margin-right: auto;
-}
-
-/* Đặt input text và ảnh ngang hàng */
-.input-preview-container {
-    display: flex;
-    align-items: flex-start;
-    gap: 5px;
-    flex-grow: 1;
-    margin-top: 10px;
-}
-
-/* Điều chỉnh input text */
-.text-input {
-    flex-grow: 1;
-    height: 40px;
-    border-radius: 8px;
-    padding: 8px 12px;
-    font-size: 14px;
+/* === Shoe-box cho hiển thị kết quả, ảnh, mô tả === */
+.shoe-box {
+  width: 100%;
+  min-height: 50px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: var(--bg-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .result-text {
-    text-align: left;
-    margin: 10px 0;
+  color: black;
 }
 
-.shoe-box {
-    width: 100%;
-    min-height: 50px; /* Độ cao tối thiểu */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #f9f9f9;
-    text-align: center;
-    display: flex;
+/* === Nhãn hiển thị === */
+.image-label,
+.user-description-label,
+.classification-result,
+.gradcam-result {
+  font-weight: bold;
+  text-align: left;
+  color: var(--text-color);
+  margin-top: 10px;
+}
+
+/* === Ảnh xem trước và Grad-CAM === */
+.preview-img,
+.gradcam-img {
+  max-width: 100%;
+  max-height: 250px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: block;
+}
+
+/* Ẩn phần tử khi không cần hiển thị */
+.hidden {
+  display: none;
+}
+
+/* === Chatbox và tin nhắn === */
+#chatbox {
+  height: 550px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  scrollbar-width: thin;
+  max-height: 1200px;
+  scroll-behavior: smooth;
+}
+
+.user-msg,
+.bot-msg {
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin: 5px 0;
+  max-width: 80%;
+  word-wrap: break-word;
+  font-size: 14px;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-msg {
+  background-color: var(--primary-color);
+  color: white;
+  align-self: flex-end;
+}
+
+.bot-msg {
+  background-color: #DFF3F1;
+  color: black;
+  align-self: flex-start;
+  text-align: left;
+}
+
+/* === Chat Input Group === */
+.chat-input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#chatInput {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+#chatInput:focus {
+  border-color: #008080;
+  background-color: #eef5ff;
+  outline: none;
+}
+
+#sendBtn {
+  flex-shrink: 0;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+/* === Loading Indicator === */
+.loading {
+  font-size: 14px;
+  font-weight: bold;
+  color: #666;
+  margin-top: 10px;
+  animation: fadeIn 0.5s infinite alternate;
+}
+
+/* === Responsive Styles === */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-}
-
-.image-label {
-    font-weight: bold;
-    text-align: left;
-    color: #005F5F;
-}
-.user-description-label {
-    font-weight: bold;
-    text-align: left;
-    color: #005F5F;
-}
-.classification-result{
-    font-weight: bold;
-    text-align:left;
-    color: #005F5F;
-}
-.gradcam-result{
-    font-weigh: bold;
-    text-align:left;
-    color: #005F5F;
-}
-
-
-/* Đảm bảo padding, border không làm vượt quá max-width */
-* {
-    box-sizing: border-box;
+  }
+  .panel {
+    max-width: 90%;
+  }
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
 }
