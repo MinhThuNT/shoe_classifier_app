@@ -14,6 +14,6 @@ class Config:
     TOKENIZER_PATH = os.getenv("TOKENIZER_PATH", "app/models/tokenizer")
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-    # Kiểm tra API Key
+    # Kiểm tra GEMINI API Key
     if not GEMINI_API_KEY:
         raise ValueError("GEMINI_API_KEY is missing! Please check your .env file.")

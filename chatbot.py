@@ -22,7 +22,7 @@ else:
     genai.configure(api_key=GEMINI_API_KEY)
     chatbot_enabled = True
 
-# Hàm gửi câu hỏi đến Gemini API
+# Gửi câu hỏi đến Gemini API
 def ask_chatbot(user_input: str) -> str:
     if not chatbot_enabled:
         return "Chatbot is disabled due to missing API key."

@@ -4,6 +4,7 @@ import os
 import logging
 
 def create_app():
+
     """Khởi tạo Flask app"""
     load_dotenv()
 
