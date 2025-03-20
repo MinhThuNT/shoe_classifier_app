@@ -73,7 +73,7 @@ pip install -r requirements.txt
 
 4. **Cấu hình biến môi trường (nếu cần)**
 
-Tạo file .env (nếu chưa có) và thêm các thông tin như SECRET_KEY, đường dẫn mô hình, v.v.
+* Tạo file .env (nếu chưa có) và thêm các thông tin như SECRET_KEY, đường dẫn mô hình, v.v.
 
 ## Cách chạy ứng dụng
 
