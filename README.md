@@ -54,7 +54,7 @@ shoe_classifier_app
 1. **Clone dự án**
 
 ```bash
-git clone https://github.com/your-username/shoe_classifier_app.git
+git clone https://github.com/MinhThuNT/shoe_classifier_app.git
 cd shoe_classifier_app
 ```
 
