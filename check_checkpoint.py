@@ -1,5 +1,5 @@
 import torch
-from hybrid_model import HybridResNetViTDistilBERT  # Import class mô hình của bạn
+from hybrid_model import HybridResNetViTDistilBERT
 
 # Load checkpoint
 checkpoint_path = "D:/shoe_classifier_app/modelss/best_model.pth"
